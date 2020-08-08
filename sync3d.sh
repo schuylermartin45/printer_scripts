@@ -19,7 +19,7 @@ function syncWrapper {
     # `dst/files/*`)
     src="${1}"
     [[ "${src}" != */ ]] && src="${src}/"
-    rsync -zarvm --delete-excluded --include "*/" --include="*.gcode" --exclude="*" "${src}" "${2}"
+    rsync -zarvm --delete-excluded --modify-window=2 --include "*/" --include="*.gcode" --exclude="*" "${src}" "${2}"
 }
 
 ####    MAIN     ####
