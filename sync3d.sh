@@ -39,7 +39,7 @@ function main {
     declare -r octoDstDir="${OCTOPRINT_USER_NAME}@${OCTOPRINT_SERVER_IP}:~/.octoprint/uploads/"
     
     # Bail if no path is found, as a safety measure
-    if [ ! -d "${sdMountPt}" ]; then
+    if [ "${1}" != "octo" ] && [ ! -d "${sdMountPt}" ]; then
         echo "Failed to find SD card named '${PRINTER_SD_CARD_NAME}'"
         exit 3
     fi
