@@ -7,6 +7,8 @@ I have a Prusa MK3S but most of these scripts are printer-agnostic.
 Here is a list of dependencies that these scripts use. I would also recommend
 setting up ssh keys with the Octoprint server for easy-of-use.
 - `rsync`
+- `udisksctl`
+  - If available, the SD card will be automatically unmounted.
 
 ### Compatibility Note
 This was tested on a Ubuntu 20.04 LTS system. MacOS likely has different

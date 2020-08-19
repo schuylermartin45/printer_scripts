@@ -36,6 +36,7 @@ function main {
 
     # Calc paths
     declare -r sdMountPt=$(mount | grep "${PRINTER_SD_CARD_NAME}" | awk '{ print $3 }')
+    declare -r sdHwdPath=$(mount | grep "${PRINTER_SD_CARD_NAME}" | awk '{ print $1 }')
     declare -r octoDstDir="${OCTOPRINT_USER_NAME}@${OCTOPRINT_SERVER_IP}:~/.octoprint/uploads/"
     
     # Bail if no path is found, as a safety measure
@@ -48,6 +49,11 @@ function main {
     if [ "${1}" != "octo" ]; then
         echo "Syncing to SD card..."
         syncWrapper "${PRINTER_FILES_DIR}" "${sdMountPt}"
+        if command -v udisksctl &> /dev/null; then
+            udisksctl unmount -b "${sdHwdPath}"
+            udisksctl power-off -b "${sdHwdPath}"
+            echo "########## SD UNMOUNTED. SAFE TO REMOVE! ##########"
+        fi
     fi
     if [ "${1}" != "sd" ]; then
         echo "Syncing up to Octoprint..."
